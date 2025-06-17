@@ -75,6 +75,10 @@ export default function Home() {
     );
   };
 
+    const handleRemove = (id) => {
+    setTasks(prev => prev.filter(task => task.id !== id));
+  };
+
   return (
     <>
       <main className="min-h-screen bg-gray-50 p-6">
@@ -121,6 +125,12 @@ export default function Home() {
                 >
                   {task.status === 'pendente' ? 'Concluída' : 'Desfazer'}
                 </button>
+                <button
+                    onClick={() => handleRemove(task.id)}
+                    className="text-sm ml-2 px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+                  >
+                    Remover
+                  </button>
               </li>
             ))}
           </ul>
