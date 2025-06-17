@@ -62,6 +62,19 @@ export default function Home() {
   setNewDescription('');
 };
 
+  const handleToggle = (id) => {
+    setTasks(prev =>
+      prev.map(task =>
+        task.id === id
+          ? {
+              ...task,
+              status: task.status === 'pendente' ? 'concluída' : 'pendente'
+            }
+          : task
+      )
+    );
+  };
+
   return (
     <>
       <main className="min-h-screen bg-gray-50 p-6">
@@ -102,6 +115,12 @@ export default function Home() {
                   <p className="text-lg text-gray-900">{task.description}</p>
                   <small className="text-gray-500">{task.createdate}</small>
                 </div>
+                <button
+                  onClick={() => handleToggle(task.id)}
+                  className="text-sm px-3 py-1 rounded border hover:bg-gray-100"
+                >
+                  {task.status === 'pendente' ? 'Concluída' : 'Desfazer'}
+                </button>
               </li>
             ))}
           </ul>
