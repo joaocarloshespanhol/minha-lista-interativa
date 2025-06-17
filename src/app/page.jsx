@@ -29,7 +29,10 @@ const initialTasks = [
 ];
 
 export default function Home() {
+
   const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState('');
+  const [newDescription, setNewDescription] = useState('');
 
   useEffect(() => {
     setTasks(initialTasks);
@@ -43,28 +46,65 @@ export default function Home() {
   setTasks(fixedDate);
 }, []);
 
+  const handleAdd = () => {
+  if (!newTask.trim() || !newDescription.trim()) return;
+
+  const newItem = {
+    id: Date.now(),
+    name: newTask.trim(),
+    description: newDescription.trim(),
+    status: 'pendente',
+    createdate: new Date().toLocaleString()
+  };
+
+  setTasks([newItem, ...tasks]);
+  setNewTask('');
+  setNewDescription('');
+};
+
   return (
     <>
       <main className="min-h-screen bg-gray-50 p-6">
         <div className="max-w-xl mx-auto">
-          <h1 className="text-4xl font-bold mb-6 text-center">Minha Lista de Tarefas Interativas</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">Minha Lista de Tarefas Interativas</h1>
 
-        <ul className="space-y-3 text-2xl">
-          {tasks.map(task => (
-            <li
-              key={task.id}
-              className="flex justify-between items-start p-3 border rounded bg-white"
+          <div className="flex gap-2 mb-4">
+            <input
+              className="flex-1 border p-2 rounded"
+              value={newTask}
+              onChange={(e) => setNewTask(e.target.value)}
+              placeholder="Adicionar nova tarefa"
+            />
+            <input
+              className="border p-2 rounded"
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+              placeholder="Descrição da tarefa"
+            />
+            <button
+              onClick={handleAdd}
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
-          <div className="flex flex-col gap-1">
-            <p className={`font-medium ${task.status === 'concluída' ? 'line-through text-green-800' : 'text-black'}`}>
-              {task.name}
-            </p>
-              <p className="text-lg text-gray-900">{task.description}</p>
-                <small className="text-gray-600">{task.createdate}</small>
+              Adicionar
+            </button>
           </div>
-            </li>
-  ))}
-        </ul>
+
+          <ul className="space-y-3">
+            {tasks.map(task => (
+              <li
+                key={task.id}
+                className="flex justify-between items-center p-3 border rounded bg-white"
+              >
+                <div>
+                  <p className={`font-medium ${task.status === 'concluída' ? 'line-through text-gray-400' : ''}`}>
+                    {task.name}
+                  </p>
+                  <p className="text-lg text-gray-900">{task.description}</p>
+                  <small className="text-gray-500">{task.createdate}</small>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </main>
     </>
