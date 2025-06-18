@@ -32,6 +32,7 @@ export default function Home() {
   const [newTask, setNewTask] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [filter, setFilter] = useState('todas');
+  const [filterPendenteDelayId, setfilterPendenteDelayId] = useState(null);
 
   useEffect(() => {
     const storedTasks = localStorage.getItem('tasks');
@@ -63,22 +64,32 @@ export default function Home() {
   };
 
   const handleToggle = (id) => {
-    setTasks(prev =>
-      prev.map(task =>
-        task.id === id
-          ? { ...task, status: task.status === 'pendente' ? 'concluída' : 'pendente' }
-          : task
-      )
-    );
-  };
+  setTasks(prev =>
+    prev.map(task =>
+      task.id === id
+        ? { ...task, status: task.status === 'pendente' ? 'concluída' : 'pendente' }
+        : task
+    )
+  );
+
+  const toggledTask = tasks.find(task => task.id === id);
+  if (filter === 'pendente' && toggledTask?.status === 'pendente') {
+    setfilterPendenteDelayId(id);
+    setTimeout(() => setfilterPendenteDelayId(null), 500);
+  }
+};
 
   const handleRemove = (id) => {
     setTasks(prev => prev.filter(task => task.id !== id));
   };
 
-  const filteredTasks = tasks.filter(task =>
-    filter === 'todas' ? true : task.status === filter
-  );
+  const filteredTasks = tasks.filter(task => {
+  if (filter === 'todas') return true;
+  if (filter === 'pendente') {
+    return task.status === 'pendente' || filterPendenteDelayId === task.id;
+  }
+  return task.status === filter;
+});
 
   const getFilterClass = (status) => {
     const base = "px-4 py-2 rounded border font-medium transition";
@@ -87,11 +98,11 @@ export default function Home() {
 
     switch (status) {
       case 'pendente':
-        return `${base} bg-yellow-400 text-white border-yellow-500`;
+        return `${base} bg-yellow-500 text-white border-yellow-600`;
       case 'concluída':
         return `${base} bg-green-500 text-white border-green-600`;
       default:
-        return `${base} bg-blue-600 text-white border-blue-700`;
+        return `${base} bg-blue-600 text-white border-blue-800`;
     }
   };
 
