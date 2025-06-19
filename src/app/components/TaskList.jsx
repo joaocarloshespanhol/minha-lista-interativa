@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
 import TaskFilter from './TaskFilter';
+import { sendEvent } from '../utils/analytics';
 
 const BASE_URL = '/api/tasks';
 
@@ -68,12 +69,21 @@ export default function TaskList() {
                 prev.map(t => (t.id === id ? updatedTask : t))
             );
 
-            // Aplica delay para esconder/mostrar a tarefa com base no filtro
-            const shouldDelay =
+             //// Evento GA4 - Alternar status \\\\
+                sendEvent({
+                    action: 'toggle_task',
+                    params: {
+                    task_id: id,
+                    new_status: updatedStatus,
+                    },
+                });
+
+            //// Aplica delay para esconder/mostrar a tarefa com base no filtro \\\\
+            const Delay =
                 (filter === 'pendente' && updatedStatus === 'concluída') ||
                 (filter === 'concluída' && updatedStatus === 'pendente');
 
-            if (shouldDelay) {
+            if (Delay) {
                 setDelayTaskIds(prev => [...prev, id]);
                 setTimeout(() => {
                     setDelayTaskIds(prev => prev.filter(taskId => taskId !== id));

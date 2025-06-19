@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { sendEvent } from '../utils/analytics';
 
 export default function TaskForm({ onAdd }) {
     const [newTask, setNewTask] = useState('');
@@ -8,13 +9,23 @@ export default function TaskForm({ onAdd }) {
 
     const handleSubmit = () => {
         if (!newTask.trim() || !newDescription.trim()) {
-            alert('Adicione o nome e descrição da tarefa')
+        alert('Adicione o nome e descrição da tarefa');
         return;
         }
+
         onAdd(newTask, newDescription);
+
+        //// Evento GA4 ao adicionar tarefa \\\\
+        sendEvent({
+        action: 'add_task',
+        params: {
+            task_title: newTask,
+            task_description: newDescription,
+        },
+        });
+
         setNewTask('');
         setNewDescription('');
-        
     };
 
     return (
@@ -40,3 +51,4 @@ export default function TaskForm({ onAdd }) {
         </div>
     );
 }
+
