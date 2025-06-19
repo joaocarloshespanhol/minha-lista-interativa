@@ -8,17 +8,17 @@ export default function TaskItem({ task, onToggle, onRemove }) {
         <div className="flex items-start gap-3 w-full">
             <button
             onClick={() => onToggle(task.id)}
-            className={`mt-1 text-xl ${task.status === 'concluída' ? 'text-green-600' : 'text-black'}`}
+            className={`mt-1 text-xl ${task.status === 'concluída' ? 'text-green-600' : 'text-gray-800'}`}
             aria-label="Alterar status da tarefa"
             >
             {task.status === 'concluída' ? <FaCheckCircle /> : <FaRegCircle />}
             </button>
 
             <div className="flex-1">
-            <p className={`text-lg font-semibold ${task.status === 'concluída' ? 'text-green-600 line-through' : 'text-black'}`}>
+            <p className={`text-lg sm:text-xl font-semibold ${task.status === 'concluída' ? 'text-green-600 line-through' : 'text-gray-800'}`}>
                 {task.name}
             </p>
-            <p className="text-sm text-gray-700">{task.description}</p>
+            <p className="text-md sm:text-lg text-gray-700">{task.description}</p>
             <small className="text-gray-500">{task.createdate}</small>
             </div>
         </div>
