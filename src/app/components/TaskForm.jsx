@@ -34,7 +34,6 @@ export default function TaskForm({ onAdd }) {
         <button
             onClick={handleSubmit}
             className="bg-[#0485FF] text-white px-4 py-2 rounded hover:bg-[#0980F0]"
-            
         >
             Adicionar
         </button>
