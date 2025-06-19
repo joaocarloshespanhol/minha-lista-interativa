@@ -4,7 +4,7 @@ import { FaCheckCircle, FaRegCircle } from 'react-icons/fa';
 
 export default function TaskItem({ task, onToggle, onRemove }) {
     return (
-        <li className="flex items-start sm:items-center justify-between p-3 border rounded bg-white">
+        <li className="flex items-start sm:items-center justify-between p-3 border rounded bg-gray-100">
         <div className="flex items-start gap-3 w-full">
             <button
             onClick={() => onToggle(task.id)}

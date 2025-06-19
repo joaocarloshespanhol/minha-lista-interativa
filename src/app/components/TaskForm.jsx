@@ -20,13 +20,13 @@ export default function TaskForm({ onAdd }) {
     return (
         <div className="flex flex-col sm:flex-row gap-2 mb-4">
         <input
-            className="flex-1 border p-2 rounded bg-white"
+            className="flex-1 border p-2 rounded bg-gray-100"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
             placeholder="Título da tarefa"
         />
         <input
-            className="flex-1 border p-2 rounded bg-white"
+            className="flex-1 border p-2 rounded bg-gray-50"
             value={newDescription}
             onChange={(e) => setNewDescription(e.target.value)}
             placeholder="Descrição da tarefa"
