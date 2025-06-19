@@ -7,7 +7,7 @@ export default function Home() {
     <main className="min-h-screen bg-gray-100 p-4 sm:p-6">
       <div className="max-w-xl mx-auto">
         <Image
-          src="/images/logo-consorcio-magalu.png"
+          src="/logo-consorcio-magalu.png"
           alt="Logo"
           width={258}
           height={138}

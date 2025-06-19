@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="pt">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/images/consorcio-magalu-small.png" />
         <meta name="theme-color" content="#FFFFF" />
       </head>
       <body
