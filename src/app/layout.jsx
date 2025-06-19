@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata = {
   title: "Minha Lista de Tarefas Interativas",
   description: "Prova técnica Frontend - Consórcio Magalu",
+    icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
