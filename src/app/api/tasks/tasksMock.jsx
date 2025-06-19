@@ -11,7 +11,7 @@ let tasks = [
         name: 'Enviar documentação complementar',
         description: 'Anexar documentação para liberação do crédito',
         status: 'concluída',
-        createdate: new Date().toLocaleDateString()
+        createdate: new Date().toLocaleString()
     },
     {
         id: 3,
