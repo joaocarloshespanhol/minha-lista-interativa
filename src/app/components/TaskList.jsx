@@ -11,7 +11,7 @@ export default function TaskList() {
     const [tasks, setTasks] = useState([]);
     const [filter, setFilter] = useState('todas');
     const [loading, setLoading] = useState(true);
-    const [filterPendenteDelayId, setfilterPendenteDelayId] = useState(null);
+    const [delayTaskIds, setDelayTaskIds] = useState([]);
 
     //// Fetch inicial \\\\
     useEffect(() => {
@@ -51,7 +51,7 @@ export default function TaskList() {
         }
     };
 
-    //// Marcar como concluída/pendente \\\\
+    //// Alternar status da tarefa \\\\
     const handleToggle = async (id) => {
         const task = tasks.find(t => t.id === id);
         const updatedStatus = task.status === 'pendente' ? 'concluída' : 'pendente';
@@ -68,10 +68,18 @@ export default function TaskList() {
                 prev.map(t => (t.id === id ? updatedTask : t))
             );
 
-            if (filter === 'pendente' && task.status === 'pendente') {
-                setfilterPendenteDelayId(id);
-                setTimeout(() => setfilterPendenteDelayId(null), 500);
+            // Aplica delay para esconder/mostrar a tarefa com base no filtro
+            const shouldDelay =
+                (filter === 'pendente' && updatedStatus === 'concluída') ||
+                (filter === 'concluída' && updatedStatus === 'pendente');
+
+            if (shouldDelay) {
+                setDelayTaskIds(prev => [...prev, id]);
+                setTimeout(() => {
+                    setDelayTaskIds(prev => prev.filter(taskId => taskId !== id));
+                }, 500);
             }
+
         } catch (err) {
             console.error('Erro ao alternar status:', err);
         }
@@ -87,16 +95,17 @@ export default function TaskList() {
         }
     };
 
+    //// Filtro de tarefas com delay respeitado \\\\
     const filteredTasks = tasks.filter(task => {
         if (filter === 'todas') return true;
         if (filter === 'pendente') {
-            return task.status === 'pendente' || filterPendenteDelayId === task.id;
+            return task.status === 'pendente' || delayTaskIds.includes(task.id);
         }
-        return task.status === filter;
+        if (filter === 'concluída') {
+            return task.status === 'concluída' || delayTaskIds.includes(task.id);
+        }
+        return true;
     });
-
-    //// Debug: verificar ids das tasks filtradas para evitar warning de key duplicada ou undefined \\\\
-    console.log('filteredTasks ids:', filteredTasks.map(t => t.id));
 
     return (
         <>
@@ -112,7 +121,7 @@ export default function TaskList() {
                     ) : (
                         filteredTasks.map((task, index) => (
                             <TaskItem
-                                key={task.id ?? `task-${index}`} //// fallback para key \\\\
+                                key={task.id ?? `task-${index}`}
                                 task={task}
                                 onToggle={handleToggle}
                                 onRemove={handleRemove}
