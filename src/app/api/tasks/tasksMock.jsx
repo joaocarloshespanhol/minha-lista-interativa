@@ -1,24 +1,31 @@
+const formatDate = () =>
+    new Date().toLocaleString('pt-BR', {
+        timeZone: 'America/Sao_Paulo',
+        dateStyle: 'short',
+        timeStyle: 'medium'
+    });
+
 let tasks = [
     {
         id: 1,
         name: 'Verificar saldo de crédito',
         description: 'Consultar valor total disponível após contemplação',
         status: 'pendente',
-        createdate: new Date().toLocaleString()
+        createdate: formatDate()
     },
     {
         id: 2,
         name: 'Enviar documentação complementar',
         description: 'Anexar documentação para liberação do crédito',
         status: 'concluída',
-        createdate: new Date().toLocaleString()
+        createdate: formatDate()
     },
     {
         id: 3,
         name: 'Simular parcelas',
         description: 'Realizar simulação no app do Consórcio Magalu',
         status: 'pendente',
-        createdate: new Date().toLocaleString()
+        createdate: formatDate()
     }
     ];
 
@@ -28,7 +35,7 @@ let tasks = [
     const newTask = {
         ...task,
         id: Date.now(),
-        createdate: new Date().toLocaleString()
+        createdate: formatDate()
     };
     tasks = [newTask, ...tasks];
     return newTask;
