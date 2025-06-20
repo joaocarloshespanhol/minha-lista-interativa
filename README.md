@@ -54,7 +54,7 @@ com foco na experiência do usuário, responsividade e boas práticas modernas d
 
 A aplicação utiliza uma API REST mockada localmente via rota /api/tasks, podendo ser substituída facilmente por endpoints reais.
 
-export const createTask = async (task) => { {<br/>
+export const createTask = async (task) => {<br/>
   const res = await fetch(BASE_URL, { <br/>
   method: 'POST', <br/>
   headers: { 'Content-Type': 'application/json' },<br/>
