@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#  Minha Lista de Tarefas Interativa
 
-## Getting Started
+Aplicação frontend desenvolvida como prova técnica para o Consórcio Magalu.
+O objetivo é gerenciar uma lista de tarefas de forma prática, interativa e acessível,
+com foco na experiência do usuário, responsividade e boas práticas modernas de desenvolvimento frontend.
 
-First, run the development server:
+ Acesse a aplicação online: (https://minha-lista-interativa.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##  Tecnologias Utilizadas
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- [Next.js 15 (App Router)](https://nextjs.org/)
+- [React 19](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Jest.js](https://jestjs.io/) + [React Testing Library](https://testing-library.com/)
+- [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+- [next/font/local](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
+- [Google Analytics v4](https://analytics.google.com/)
+- REST mock local com `/api/tasks` via rotas do App Router
+- Deploy via [Vercel](https://vercel.com/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+##  Funcionalidades
 
-To learn more about Next.js, take a look at the following resources:
+- ✅ Exibição da lista de tarefas com nome, descrição, status e data.
+- ✅ Tarefas recém-criadas começam como pendentes, aguardando conclusão.
+- ✅ Adição de novas tarefas por input de texto.
+- ✅ Marcar tarefas como concluídas.
+- ✅ Remover tarefas da lista.
+- ✅ Filtro por: todas, pendentes e concluídas.
+- ✅ Diferenciação visual para tarefas concluídas.
+- ✅ Persistência automática com `localStorage`.
+- ✅ Suporte completo a mobile, tablet e desktop.
+- ✅ PWA.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+##  Testes Automatizados
 
-## Deploy on Vercel
+- Testes implementados com **Jest.js** e **React Testing Library**
+- Cobertura das principais funcionalidades:
+  - Adição de tarefa
+  - Marcação como concluída
+  - Filtro de tarefas
+  - Exclusão de tarefas
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+"npm run test"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+##  Simulação de API (Mock)
+
+A aplicação utiliza uma API REST mockada localmente via rota /api/tasks, podendo ser substituída facilmente por endpoints reais.
+
+const response = await fetch('/api/tasks', {<br/>
+  method: 'POST',<br/>
+  body: JSON.stringify(novaTarefa),<br/>
+  headers: { 'Content-Type': 'application/json' },<br/>
+});
+
+---
+
+##  Google Analytics
+
+Integrado com GA4 para rastrear interações do usuário como:
+
+- Adição de tarefas
+- Conclusão de tarefas
+- Uso de filtros
+
+---
+
+##  Design e UX
+
+- Interface mobile-first com Tailwind CSS
+- Layout simples e funcional, com feedback visual
+- Tipografia com fontes locais MagaluTextos
+- Componente centralizado (TaskList) controla todo o estado
+- UX intuitiva e sem distrações
+
+---
+
+#  Como Rodar o Projeto
+
+ Clone o repositório
+git clone https://github.com/seu-usuario/minha-lista-interativa.git
+
+ Acesse a pasta<br/>
+"cd minha-lista-interativa"
+
+
+ Instale as dependências<br/>
+"npm install"
+
+
+ Rode o ambiente de desenvolvimento<br/>
+"npm run dev"
+
+
+ Acesse: http://localhost:3000
+ 
+
+Desenvolvido com muito capricho por João;
