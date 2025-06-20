@@ -86,7 +86,7 @@ Integrado com GA4 para rastrear interações do usuário como:
 #  Como Rodar o Projeto
 
  Clone o repositório
-git clone https://github.com/seu-usuario/minha-lista-interativa.git
+git clone https://github.com/joaocarloshespanhol/minha-lista-interativa.git
 
  Acesse a pasta<br/>
 "cd minha-lista-interativa"
